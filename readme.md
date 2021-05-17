@@ -2,7 +2,7 @@
 
 ## UML
 Nodo.
-
+  
     - var Informacion  // valor del nodo.
     - nodo Derecho // apuntador nodo derecha.
     - nodo Izquierda // apuntador nodo izquierda.
