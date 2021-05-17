@@ -4,15 +4,13 @@ class Nodo
 {
 
     private $info;
-    //private $derecho;
-    //private $izquierdo;
-    private $hijos = array();
+    private $derecho;
+    private $izquierdo;
+    //private $hijos = array();
 
     public function __construct($info)
     {
         $this->info = $info;
-        //$this->derecho = null;
-        //$this->izquierdo = null;
     }
 
 
@@ -25,7 +23,7 @@ class Nodo
         }
     }
 
-    /* public function getDerecho()
+     public function getDerecho()
     {
         return $this->derecho;
     }
@@ -33,7 +31,7 @@ class Nodo
     public function getIzquierdo()
     {
         return $this->izquierdo;
-    }*/
+    }
 
 
     public function setInfo($info)
@@ -41,7 +39,7 @@ class Nodo
         $this->info = $info;
     }
 
-    /*public function setDerecho($derecho)
+    public function setDerecho($derecho)
     {
         $this->derecho = $derecho;
     }
@@ -50,9 +48,9 @@ class Nodo
     {
         $this->izquierdo = $izquierdo;
     }
-    */
+    
 
-    public function getHijos()
+   /* public function getHijos()
     {
         return $this->hijos;
     }
@@ -65,5 +63,5 @@ class Nodo
         } elseif ($lado == "d") {
             $this->hijos[1] = $hijo;
         }
-    }
+    }*/
 }

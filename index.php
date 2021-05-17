@@ -2,7 +2,6 @@
 include("arbolBinario.php");
 
 session_start();
-
 if (isset($_SESSION["arbol"]) == false) {
     $_SESSION["arbol"] = new arbolBinario(null);
 }
@@ -93,7 +92,7 @@ function deleteDialog($msg)
         <div class="row">
             <!-- Action Trees-->
             <div class="col-6">
-                <div class="row">
+                <div class="row" style="display: block;">
                     <div class="col-12">
                         <form method="post">
                             <p>Crear Arbol</p>
@@ -107,7 +106,7 @@ function deleteDialog($msg)
                 </div>
                 <form method="post">
                     <input type="submit" value="ver arbol" name="ver-arbol">
-                    <input type="submit" value="ver arbol-recursivo" name="ver-arbol-recursivo">
+                    <input type="submit" value="ver arbol-recursivo" name="ver-arbol-recursivo" disabled>
                 </form>
 
                 <div class="row">

@@ -33,11 +33,11 @@ class arbolBinario
             $nodo =  $this->buscar($this->raiz, $nodoPadre);
 
             if ($ubicacion == "I") {
-                // $nodo->setIzquierdo($nuevoNodo);
-                $nodo->setHijos($nuevoNodo, 'i');
+                $nodo->setIzquierdo($nuevoNodo);
+                //$nodo->setHijos($nuevoNodo, 'i');
             } elseif ($ubicacion == "D") {
-                //$nodo->setDerecho($nuevoNodo);
-                $nodo->setHijos($nuevoNodo, 'd');
+                $nodo->setDerecho($nuevoNodo);
+                //$nodo->setHijos($nuevoNodo, 'd');
             }
             return $nodo;
         } // no se puede agregar nodo sin padre
@@ -46,20 +46,33 @@ class arbolBinario
 
     public function buscar($nodo, $value)
     {
-        echo "nodo info:" . $nodo->getInfo() . "---";
-        echo "valor a buscar: " . $value . "<br>";
+            # code...
+            echo "nodo info:" . $nodo->getInfo() . "---";
+            echo "valor a buscar: " . $value . "<br>";
 
-        if ($nodo == null) {
-            return null;
-        } elseif ($nodo->getInfo() == $value) {
-            return $nodo;
-        }
-        ## array binario
-        echo "buscar valor: " . $value . "<br>";
+            if ($nodo == null) {
+                return null;
+            } elseif ($nodo->getInfo() == $value) {
+                return $nodo;
+            }
+            ## array binario
+            echo "buscar valor: " . $value . "<br>";
 
-        $n = $nodo->getHijos();
+            // $n = $nodo->getHijos();
 
-        if (!empty($n[0])) {
+            if (!empty($nodo->getIzquierdo())) {
+                # code...
+                $izquierda = $this->buscar($nodo->getIzquierdo(), $value);
+            }
+            if (!empty($nodo->getDerecho())) {
+                # code...
+                $derecha = $this->buscar($nodo->getDerecho(), $value);
+
+            }
+
+
+
+            /* if (!empty($n[0])) {
             $izquierda = $this->buscar($n[0], $value);
         }else {
             $izquierda = null;
@@ -68,23 +81,36 @@ class arbolBinario
             $derecha = $this->buscar($n[1], $value);
         }else {
             $derecha = null;
-        }
+        }*/
 
 
-        if (!empty($derecha)) {
-            return $derecha;
-        } else {
-            return $izquierda;
-        }
+            if (!empty($derecha)) {
+                return $derecha;
+            } elseif (!empty($izquierda)) {
+                return $izquierda;
+            }//else ??
+        
     }
 
 
     public function verHijos($padre)
     {
         if (!empty($padre)) {
-            foreach ($padre->getHijos() as $key => $value) {
+            /*foreach ($padre->getHijos() as $key => $value) {
                 print_r($value); // nodo
                 //return $this->verHijos($value);
+            }
+            */
+            if ($padre->getDerecho() != null && $padre->getIzquierdo() != null) {
+                # code...
+                echo "Derecha: " . $padre->getDerecho()->getInfo();
+                echo "Izquierdo: " . $padre->getIzquierdo()->getInfo();
+            } elseif ($padre->getDerecho() != null) {
+                echo "Derecha: " . $padre->getDerecho()->getInfo();
+                echo "Izquierdo: nulo";
+            } else {
+                echo "Derecha: nulo";
+                echo "Izquierdo: " . $padre->getIzquierdo()->getInfo();
             }
         }
     }
@@ -92,12 +118,14 @@ class arbolBinario
     public function verArbol($padre)
     {
         if (!empty($padre)) {
-            $n = $padre->getHijos();
+            // $n = $padre->getHijos();
+
             echo "<br>padre:" . $padre->getInfo();
             // print_r($n[0]);
             // print_r($n[1]);
-            if (!empty($n[0]) && !empty($n[1])) {
-                echo "<br>iz: " . $n[0]->getInfo() . "de: " . $n[1]->getInfo();
+
+            if (!empty($padre->getDerecho()) && !empty($padre->getIzquierdo())) {
+                echo "<br>iz: " . $padre->getIzquierdo() . "de: " . $padre->getDerecho();
                 foreach ($padre->getHijos() as $key => $value) {
 
                     return $this->verArbol($value);
@@ -115,6 +143,26 @@ class arbolBinario
                     return $this->verArbol($value);
                 }
             }
+
+            /* if (!empty($n[0]) && !empty($n[1])) {
+                echo "<br>iz: " . $n[0]->getInfo() . "de: " . $n[1]->getInfo();
+                foreach ($padre->getHijos() as $key => $value) {
+
+                    return $this->verArbol($value);
+                }
+            } elseif (!empty($n[0])) {
+                echo "<br>iz: " . $n[0]->getInfo();
+                foreach ($padre->getHijos() as $key => $value) {
+
+                    return $this->verArbol($value);
+                }
+            } elseif (!empty($n[1])) {
+                echo "<br> de: " . $n[1]->getInfo();
+                foreach ($padre->getHijos() as $key => $value) {
+
+                    return $this->verArbol($value);
+                }
+            }*/
         }
     }
 }
